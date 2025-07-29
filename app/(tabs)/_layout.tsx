@@ -2,7 +2,6 @@ import React from 'react';
 import { Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text } from 'react-native';
-// import { SFSymbol } from 'expo-symbols';
 import { Ionicons } from '@expo/vector-icons';
 
 interface TabIconProps {
@@ -51,7 +50,7 @@ const TabsLayout = () => {
         }}
       >
         <Tabs.Screen
-          name="index"
+          name="home"
           options={{
             title: 'Home',
             headerShown: false,
@@ -115,7 +114,7 @@ const TabsLayout = () => {
         />
       </Tabs>
       
-      <StatusBar style="dark" backgroundColor="#F8F8FF" />
+      <StatusBar style="dark" /> 
     </>
   );
 };

@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming } from 'react-native-reanimated';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useStore } from '@/src/store';
 import SearchInput from '@/src/components/SearchInput';
 import Card from '@/src/components/Card';
@@ -28,6 +28,7 @@ const HomeScreen = () => {
 
   const scrollViewRef = useRef<ScrollView>(null);
   const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Auto-scroll animation for carousel
   const translateX = useSharedValue(0);
@@ -36,8 +37,14 @@ const HomeScreen = () => {
     transform: [{ translateX: translateX.value }],
   }));
 
+  // Fixed useEffect with proper cleanup
   useEffect(() => {
-    const interval = setInterval(() => {
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    intervalRef.current = setInterval(() => {
       setCurrentImageIndex((prev) => {
         const nextIndex = (prev + 1) % carouselImages.length;
         
@@ -48,37 +55,42 @@ const HomeScreen = () => {
       });
     }, 3000);
 
-    return () => clearInterval(interval);
-  }, [translateX]);
+    // Cleanup function
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []); // Empty dependency array to run only once
 
   const filteredProducts = getFilteredProducts();
   const bestSellers = getBestSellers();
   const cartItemCount = getCartItemCount();
 
-  const handleProductPress = (productId: string) => {
+  const handleProductPress = useCallback((productId: string) => {
     router.push(`/details/${productId}`);
-  };
+  }, []);
 
-  const handleCartPress = () => {
+  const handleCartPress = useCallback(() => {
     // Would navigate to cart screen in a real app
     router.push('/(tabs)/catalog');
-  };
+  }, []);
 
-  const handleSearchChange = (query: string) => {
+  const handleSearchChange = useCallback((query: string) => {
     setSearchQuery(query);
     if (query.trim()) {
       router.push('/(tabs)/catalog');
     }
-  };
+  }, [setSearchQuery]);
 
-  const renderProductItem = ({ item }: { item: Product }) => (
+  const renderProductItem = useCallback(({ item }: { item: Product }) => (
     <Card
       type="product"
       data={item}
       onPress={() => handleProductPress(item.id)}
       className="w-44 mr-4"
     />
-  );
+  ), [handleProductPress]);
 
   if (loading) {
     return <Loading text="Loading marketplace..." />;

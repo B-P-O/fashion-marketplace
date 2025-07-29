@@ -31,13 +31,11 @@ const Card: React.FC<CardProps> = (props) => {
     const { data: product, onPress, showAddToCart = true, className = '' } = props;
     const liked = isLiked(product.id);
 
-    const handleAddToCart = (e: any) => {
-      e.stopPropagation();
+    const handleAddToCart = () => {
       addToCart(product);
     };
 
-    const handleToggleLike = (e: any) => {
-      e.stopPropagation();
+    const handleToggleLike = () => {
       toggleLike(product.id);
     };
 

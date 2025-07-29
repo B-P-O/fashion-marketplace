@@ -56,7 +56,7 @@ const RootLayout = () => {
         <Stack.Screen name="details/[id]" options={{ headerShown: false }} />
       </Stack>
       
-      <StatusBar style="dark" backgroundColor="#F8F8FF" />
+      <StatusBar style="dark" /> style="dark" backgroundColor="#F8F8FF" />
       <Toast />
     </>
   );

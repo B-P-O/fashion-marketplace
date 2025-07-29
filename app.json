@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "FashionMarketplace",
+    "name": "FashionMarketPlace",
     "slug": "fashion-marketplace",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,14 +12,14 @@
     
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.fashion.marketplace"
+      "bundleIdentifier": "com.fashion.marketPlace"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/icon.png",
         "backgroundColor": "#228B22" 
       },
-      "package": "com.fashion.marketplace"
+      "package": "com.fashion.marketPlace"
     },
     "web": {
       "bundler": "metro",
@@ -28,7 +28,7 @@
     },
     "splash": {  
       "image": "./src/assets/images/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#228B22"  
     },
     "plugins": [

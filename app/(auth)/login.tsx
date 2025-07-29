@@ -25,20 +25,20 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-background">
-      <View className="flex-1 justify-center items-center px-6">
+        <View className="flex-1 justify-center items-center px-6" style={{ backgroundColor: 'lightgray'} }>
         {/* Onboarding Image */}
-        <View className="w-80 h-80 mb-8">
+        <View className="w-3/4 h-1/2 mb-4">
           <Image
             source={images.onboarding}
             style={{ width: '100%', height: '100%' }}
-            contentFit="cover"
+            contentFit="contain"
             className="rounded-2xl"
             cachePolicy="memory-disk"
           />
         </View>
 
         {/* Welcome Text */}
-        <View className="items-center mb-12">
+   <View className="items-center mb-4" style={{ backgroundColor: 'lightblue' }}>
           <Text className="text-text font-rExtrabold text-3xl text-center mb-4">
             Welcome to Fashion Marketplace
           </Text>
@@ -48,7 +48,7 @@ const LoginScreen = () => {
         </View>
 
         {/* Login Button */}
-        <View className="w-full">
+       <View className="w-full" style={{ backgroundColor: 'lightgreen' }}>
           <CustomButton
             title="Get Started"
             onPress={handleLogin}

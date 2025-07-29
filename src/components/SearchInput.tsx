@@ -16,18 +16,20 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onSearchChange,
 }) => {
   const { searchQuery, setSearchQuery } = useStore();
-  const [localQuery, setLocalQuery] = useState(searchQuery);
+  const [localQuery, setLocalQuery] = useState(searchQuery || '');
   const [debouncedQuery] = useDebounce(localQuery, 300);
 
   // Update store when debounced query changes
   useEffect(() => {
     setSearchQuery(debouncedQuery);
-    onSearchChange?.(debouncedQuery);
+    if (onSearchChange) {
+      onSearchChange(debouncedQuery);
+    }
   }, [debouncedQuery, setSearchQuery, onSearchChange]);
 
   // Update local state when store query changes (for external updates)
   useEffect(() => {
-    setLocalQuery(searchQuery);
+    setLocalQuery(searchQuery || '');
   }, [searchQuery]);
 
   const handleClear = () => {
@@ -50,7 +52,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         autoCorrect={false}
       />
       
-      {localQuery.length > 0 && (
+      {localQuery && localQuery.length > 0 && (
         <TouchableOpacity onPress={handleClear} className="ml-2">
           <Ionicons name="close-circle" size={20} color="#A0AEC0" />
         </TouchableOpacity>
