@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,6 +24,7 @@ const { width: screenWidth } = Dimensions.get('window');
 
 const DetailScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const insets = useSafeAreaInsets();
   const { 
     products, 
     addToCart, 
@@ -123,7 +125,7 @@ const DetailScreen = () => {
 
   if (!product) {
     return (
-      <SafeAreaView className="flex-1 bg-background">
+      <SafeAreaView className="flex-1 bg-background" edges={['top', 'left', 'right']}>
         <EmptyState
           title="Product Not Found"
           message="The product you're looking for doesn't exist"
@@ -136,7 +138,7 @@ const DetailScreen = () => {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" edges={['top', 'left', 'right']}>
       {/* Header */}
       <View className="flex-row items-center justify-between px-4 py-3 bg-white border-b border-gray-200">
         <TouchableOpacity
@@ -177,7 +179,10 @@ const DetailScreen = () => {
         </View>
       </View>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView 
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 140 + insets.bottom }} // Add safe area bottom
+      >
         {/* Product Image */}
         <View className="relative">
           <Image
@@ -248,9 +253,6 @@ const DetailScreen = () => {
             </Text>
           </View>
         </View>
-
-        {/* Bottom Padding */}
-        <View className="h-32" />
       </ScrollView>
 
       {/* Animated Payment Button with Blur Background */}
@@ -258,7 +260,12 @@ const DetailScreen = () => {
         style={[animatedBlurStyle]} 
         className="absolute bottom-0 left-0 right-0"
       >
-        <BlurView intensity={80} tint="light" className="p-4 border-t border-gray-200">
+        <BlurView 
+          intensity={80} 
+          tint="light" 
+          style={{ paddingBottom: insets.bottom }}
+          className="p-4 border-t border-gray-200"
+        >
           <View className="flex-row gap-3">
             <CustomButton
               title="Add to Cart"

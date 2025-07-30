@@ -30,7 +30,7 @@ const Filters: React.FC<FiltersProps> = ({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 4 }}
       >
-        {categories.map((category) => {
+        {categories.map((category, index) => {
           const isSelected = selectedCategory === category.value;
           
           return (
@@ -38,7 +38,8 @@ const Filters: React.FC<FiltersProps> = ({
               key={category.id}
               onPress={() => handleCategorySelect(category.value as FilterCategory)}
               className={`
-                px-4 py-2 mr-3 rounded-full border
+                px-4 py-2 rounded-full border
+                ${index === categories.length - 1 ? 'mr-3' : 'mr-6'}
                 ${isSelected 
                   ? 'bg-primary border-primary' 
                   : 'bg-white border-gray-300'

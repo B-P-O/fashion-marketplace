@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { View, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import Toast from 'react-native-toast-message';
@@ -19,13 +20,13 @@ const LoginScreen = () => {
 
     // Navigate to main app after short delay
     setTimeout(() => {
-      router.replace('/(tabs)');
+      router.replace('/(tabs)/home');
     }, 1000);
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-        <View className="flex-1 justify-center items-center px-6" style={{ backgroundColor: 'lightgray'} }>
+    <>
+      <View className="flex-1 h-full justify-center items-center px-6" style={{ backgroundColor: 'lightgray'} }>
         {/* Onboarding Image */}
         <View className="w-3/4 h-1/2 mb-4">
           <Image
@@ -38,17 +39,17 @@ const LoginScreen = () => {
         </View>
 
         {/* Welcome Text */}
-   <View className="items-center mb-4" style={{ backgroundColor: 'lightblue' }}>
+        <View className="items-center mb-4" >
           <Text className="text-text font-rExtrabold text-3xl text-center mb-4">
             Welcome to Fashion Marketplace
           </Text>
-          <Text className="text-gray-500 font-rMedium text-lg text-center leading-6">
+          <Text className="text-gray-500 font-rBold text-lg text-center leading-6">
             Discover the latest trends and shop from your favorite brands
           </Text>
         </View>
 
         {/* Login Button */}
-       <View className="w-full" style={{ backgroundColor: 'lightgreen' }}>
+        <View className="w-full">
           <CustomButton
             title="Get Started"
             onPress={handleLogin}
@@ -57,12 +58,10 @@ const LoginScreen = () => {
             className="w-full mb-4"
           />
           
-          <Text className="text-gray-400 font-rLight text-sm text-center">
-            Tap to continue to the marketplace
-          </Text>
+        
         </View>
       </View>
-    </SafeAreaView>
+    </>
   );
 };
 

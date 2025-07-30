@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Modal } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useStore } from '@/src/store';
@@ -114,9 +115,9 @@ const CatalogScreen = () => {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" edges={['top', 'left', 'right']}>
       {/* Header */}
-      <View className="px-4 py-3 border-b border-gray-200 bg-white">
+      <View className="px-4 py-4 border-b border-gray-200 bg-white">
         <Text className="text-text font-rBold text-2xl mb-3">
           Catalog
         </Text>
@@ -125,15 +126,15 @@ const CatalogScreen = () => {
         <SearchInput placeholder="Search products..." />
       </View>
 
-      {/* Filters and Sort */}
-      <View className="bg-white px-4 py-3 border-b border-gray-200">
-        <View className="flex-row items-center justify-between mb-3">
+      {/* Filters and Sort Section - Improved Spacing */}
+      <View className="bg-white px-4 py-4 border-b border-gray-200">
+        <View className="flex-row items-center justify-between mb-4">
           <Text className="text-text font-rSemibold text-lg">
-            Filters
+            Categories
           </Text>
           <TouchableOpacity
             onPress={() => setShowSortModal(true)}
-            className="flex-row items-center"
+            className="flex-row items-center bg-gray-50 px-3 py-2 rounded-lg"
             activeOpacity={0.7}
           >
             <Ionicons name="swap-vertical" size={18} color="#228B22" />
@@ -143,6 +144,7 @@ const CatalogScreen = () => {
           </TouchableOpacity>
         </View>
         
+        {/* Filters with better spacing */}
         <Filters showTitle={false} />
       </View>
 
@@ -162,7 +164,7 @@ const CatalogScreen = () => {
             renderItem={renderProductItem}
             keyExtractor={(item) => item.id}
             numColumns={2}
-            contentContainerStyle={{ padding: 16 }}
+            contentContainerStyle={{ padding: 16, paddingBottom: 20 }}
             showsVerticalScrollIndicator={false}
             ListFooterComponent={
               totalPages > 1 ? (

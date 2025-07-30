@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -97,10 +98,13 @@ const HomeScreen = () => {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <SafeAreaView className="flex-1 bg-background" edges={['top', 'left', 'right']}>
+      <ScrollView 
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      >
         {/* Header */}
-        <View className="flex-row items-center justify-between px-4 py-3">
+        <View className="flex-row items-center justify-between px-4 py-4">
           <View>
             <Text className="text-text font-rBold text-2xl">
               Fashion Marketplace

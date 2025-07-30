@@ -3,6 +3,7 @@ import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { useStore } from '../src/store';
 import "@/global.css";
@@ -49,16 +50,16 @@ const RootLayout = () => {
   }
 
   return (
-    <>
+    <SafeAreaProvider>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="details/[id]" options={{ headerShown: false }} />
       </Stack>
       
-      <StatusBar style="dark" /> style="dark" backgroundColor="#F8F8FF" />
+      <StatusBar style="dark" backgroundColor="#F8F8FF" />
       <Toast />
-    </>
+    </SafeAreaProvider>
   );
 };
 

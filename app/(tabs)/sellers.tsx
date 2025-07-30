@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, SafeAreaView, FlatList } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { useStore } from '@/src/store';
 import Card from '@/src/components/Card';
@@ -53,9 +54,9 @@ const SellersScreen = () => {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" edges={['top', 'left', 'right']}>
       {/* Header */}
-      <View className="px-4 py-3 border-b border-gray-200 bg-white">
+      <View className="px-4 py-4 border-b border-gray-200 bg-white">
         <Text className="text-text font-rBold text-2xl">
           Sellers
         </Text>
@@ -72,7 +73,7 @@ const SellersScreen = () => {
             renderItem={renderSellerItem}
             keyExtractor={(item) => item.id}
             numColumns={2}
-            contentContainerStyle={{ padding: 16 }}
+            contentContainerStyle={{ padding: 16, paddingBottom: 20 }}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <View className="mb-4">

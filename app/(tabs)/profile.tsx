@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
@@ -32,8 +33,11 @@ const ProfileScreen = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <SafeAreaView className="flex-1 bg-background" edges={['top', 'left', 'right']}>
+      <ScrollView 
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      >
         {/* Header */}
         <View className="bg-white px-4 py-6 border-b border-gray-200">
           <View className="flex-row items-center justify-between mb-4">

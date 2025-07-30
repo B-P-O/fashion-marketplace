@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
 interface TabIconProps {
@@ -32,6 +33,8 @@ const TabIcon: React.FC<TabIconProps> = ({ name, color, focused, title }) => {
 };
 
 const TabsLayout = () => {
+  const insets = useSafeAreaInsets();
+
   return (
     <>
       <Tabs
@@ -43,8 +46,8 @@ const TabsLayout = () => {
             backgroundColor: '#FFFFFF',
             borderTopWidth: 1,
             borderTopColor: '#E2E8F0',
-            height: 60,
-            paddingBottom: 8,
+            height: 60 + insets.bottom, // Add safe area bottom for home indicator
+            paddingBottom: insets.bottom + 8,
             paddingTop: 8,
           },
         }}
@@ -68,14 +71,14 @@ const TabsLayout = () => {
         <Tabs.Screen
           name="catalog"
           options={{
-            title: 'Catalog',
+            title: 'List',
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 name="grid"
                 color={color}
                 focused={focused}
-                title="Catalog"
+                title="List"
               />
             ),
           }}
@@ -84,14 +87,14 @@ const TabsLayout = () => {
         <Tabs.Screen
           name="sellers"
           options={{
-            title: 'Sellers',
+            title: 'Brand',
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 name="people"
                 color={color}
                 focused={focused}
-                title="Sellers"
+                title="Brand"
               />
             ),
           }}
@@ -100,14 +103,14 @@ const TabsLayout = () => {
         <Tabs.Screen
           name="profile"
           options={{
-            title: 'Profile',
+            title: 'Me',
             headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
                 name="person"
                 color={color}
                 focused={focused}
-                title="Profile"
+                title="Me"
               />
             ),
           }}
