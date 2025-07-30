@@ -41,7 +41,7 @@ A modern React Native fashion marketplace app built with Expo.
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/fashion-marketplace.git
+git clone https://github.com/B-P-O/fashion-marketplace.git
 
 # Navigate to project directory
 cd fashion-marketplace
