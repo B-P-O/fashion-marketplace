@@ -23,7 +23,7 @@ A modern React Native fashion marketplace app built with Expo.
 ## 📥 Download APK
 **Latest Version: v1.0.0**
 
-[📱 Download Fashion Marketplace APK](https://github.com/B-P-O/fashion-marketplace/releases/latest/download/fashion-marketplace.apk)
+[📱 Download Fashion Marketplace APK](https://expo.dev/artifacts/eas/nwUqFxtLwhRe2AhmTJuW94.apk)
 
 ### Installation Instructions:
 1. Download the APK file from the link above
